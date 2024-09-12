@@ -1,0 +1,29 @@
+<div class="header">
+    <div class="header__aplicacao">DADOS EVA</div>
+    <!-- <div class="header__usuario">Usuário: {{info[0].userLogin}}</div> -->
+    <div class="header__nome">Programas ativos: {{info.length}}</div>
+</div>
+<p-table class="table" [value]="info" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header" style="position: fixed; top: 0;">
+        <tr>
+            <th class="table__header" id="email">Email</th>
+            <th class="table__header" id="nome-perfil">Nome do Perfil</th>
+            <th class="table__header" id="id-programa">Id do Programa</th>
+            <th class="table__header" id="nome-programa">Nome do Programa</th>
+            <!-- <th class="table__header" id="id-ator">Id do Ator</th> -->
+            <th class="table__header" id="login-usuario">Login do Usuário</th>
+            <th class="table__header" id="id-usuario">Id do Usuário</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-info>
+        <tr class="table__row">
+            <td class="table__row__cell">{{ info.email }}</td>
+            <td class="table__row__cell">{{ info.profileName }}</td>
+            <td class="table__row__cell">{{ info.programId }}</td>
+            <td class="table__row__cell">{{ info.programName }}</td>
+            <!-- <td class="table__row__cell">{{ info.actorId }}</td> -->
+            <td class="table__row__cell">{{ info.userLogin }}</td>
+            <td class="table__row__cell">{{ info.userId }}</td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,20 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    background-color: var(--primary-50);
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    color: var(--bluegray-500);
+    text-align: center;
+}

@@ -1,0 +1,159 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/nano/theme.css";
+@import "primeng/resources/primeng.css";
+
+body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--primary-900);
+}
+
+ul {
+    list-style: none;
+    padding: 16px;
+    margin: 0;
+}
+
+button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.programa {
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.programa:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.lista {
+    display: none;
+}
+
+.lista.show {
+    display: block;
+}
+
+.conteudo {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.conteudo:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.conteudo-titulo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.conteudo-descricao {
+    font-size: 1.1em;
+    text-align: justify;
+}
+
+.conteudo-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.conteudo-input {
+    display: flex;
+    gap: 16px;
+    flex: 1 1 0px;
+    width: 100%;
+    align-items: center;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.conteudo-input label {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.conteudo-input input {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.conteudo-executar {
+    margin-top: auto;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    background: #007bff;
+}
+
+.conteudo-executar:hover {
+    background: #0096ff;
+    backdrop-filter: blur(5px);
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.conteudo-executar.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+
+.conteudo-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background-color: #007bff;
+        color: #fff;
+
+        th {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    }
+
+    tbody {
+        background-color: #f9f9f9;
+
+        tr {
+            text-align: center;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    }
+}        
