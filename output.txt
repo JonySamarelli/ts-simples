@@ -1,0 +1,26 @@
+!Não é possível desvincular a RC #PIC
+#Isso acontece pois a RC foi deletada dentro do ERP, 
+#para resolver isso devemos mudar o status da RC dentro do PIC para “Cancelada”. 
+@string #cd_rc #Código da RC para ser “Cancelada”
+?UPDATE TB_PEDIDO_ITEM_ARTE SET id_status = 16
+?SELECT * FROM TB_PEDIDO_ITEM_ARTE
+?WHERE id_pedido_item IN 
+?( SELECT id_pedido_item FROM TB_RC WHERE cd_oracle_requisition = cd_rc )
+
+!Alterar status de uma RC #PIC
+#RC está com status errado, seleciona status que deveria ser aplicado para a RC. 
+@string #cd_rc #Código da RC para ser “Cancelada”
+@select #rc-status #Novo status da RC #TB_STATUS_PEDIDO_ITEM_ARTE
+?UPDATE TB_PEDIDO_ITEM_ARTE SET id_status = rc-status
+?SELECT * FROM TB_PEDIDO_ITEM_ARTE
+?WHERE id_pedido_item IN 
+?( SELECT id_pedido_item FROM TB_RC WHERE cd_oracle_requisition = cd_rc )
+
+!Cancelar pedido #PIC
+#A solução é bem simples, basta executar a procedure abaixo:
+@number #id_pedido #Número da RC:
+?CALL cancelar_pedido_ts( id_pedido )
+
+!Monitoramento PIC #PIC
+#Realiza Moniitormento do PIC
+@monitoramento ?SELECT 'RC Veículo' AS Monitoramento, COUNT(DISTINCT tpv.id_pedido) AS Quantidade FROM TB_ACIONAMENTO ta LEFT JOIN TB_PEDIDO_VEICULO tpv ON tpv.id = ta.id_pedido_veiculos LEFT JOIN TB_PEDIDO_ITEM tpi ON tpi.id_pedido = tpv.id_pedido LEFT JOIN TB_PEDIDO_ITEM_VEICULO tpiv ON tpiv.id_pedido_item = tpi.id WHERE ta.dt_data_termino_gravacao >= DATE_ADD(NOW(), INTERVAL -30 DAY) AND dt_erro_conecta IS NOT NULL UNION SELECT 'BU Null' AS Monitoramento, COUNT(id) AS Quantidade FROM TB_PEDIDO tp WHERE (tp.id_unidade_negocio = 0 OR tp.nm_codigo_unidade_negocio IS NULL) UNION select 'RC Rejeitada' AS Monitoramento, COUNT(DISTINCT tp.id) Quantidade from TB_PEDIDO tp join TB_PEDIDO_VEICULO tpv on tpv.id_pedido = tp.id join TB_PEDIDO_ITEM tpi on tpi.id_pedido = tp.id join TB_PEDIDO_ITEM_VEICULO tpiv on tpiv.id_pedido_item = tpi.id join TB_ACIONAMENTO ta on ta.id_pedido_veiculos = tpv.id join TB_RC tr on tr.id_pedido_item = tpi.id where tr.id_acordo is null and ta.dt_data_termino_gravacao >= DATE_ADD(NOW(), INTERVAL -30 DAY) and tpiv.id_status = 17 UNION select 'Itens Undefined' AS Monitoramento, count(*) Quantidade FROM TB_PEDIDO tp join TB_PEDIDO_VEICULO tpv on tpv.id_pedido = tp.id join TB_ACIONAMENTO ta on ta.id_pedido_veiculos = tpv.id join TB_ACIONAMENTO_ITEM tai on tai.id_acionamento = ta.id where tai.id_pedido_item_veiculo is null group by tai.id_acionamento; 
