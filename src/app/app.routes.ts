@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { SempreComponent } from './component/sempre/sempre.component';
-import { SgpComponent } from './component/sgp/sgp.component';
-import { EvaComponent } from './component/eva/eva.component';
-import { NewContentComponent } from './component/new-content/new-content.component';
+import { SempreComponent } from './components/sempre/sempre.component';
+import { SgpComponent } from './components/sgp/sgp.component';
+import { EvaComponent } from './components/eva/eva.component';
+import { NewContentComponent } from './components/new-content/new-content.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TsSimplesComponent } from './pages/ts-simples/ts-simples.component';

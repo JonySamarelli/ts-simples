@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { MenuComponent } from './component/menu/menu.component';
+import { MenuComponent } from './components/menu/menu.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
 
 @Component({

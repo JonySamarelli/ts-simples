@@ -156,6 +156,55 @@ export class TsSimplesComponent {
     }
   }
 
+  populateSelect(select: HTMLSelectElement, selectDb: string, programa: string) {
+    this.httpClient.getSelectOptions(programa, selectDb).subscribe((res: any) => {
+      select.innerHTML = '';
+      res.forEach((option: any) => {
+        const $option = document.createElement('option');
+        $option.value = option.id;
+        $option.innerHTML = option.status;
+        select.appendChild($option);
+      });
+    });
+  };
+
+  montaTabelaMonitoramento(query: string, programa: string, conteudo: HTMLElement) {
+    this.httpClient.getdadosMonitoramento(programa, query).subscribe((res: any) => {
+      const $table = document.createElement('table');
+      $table.classList.add('conteudo-table');
+      const $thead = document.createElement('thead');
+      const $tbody = document.createElement('tbody');
+      const $tr = document.createElement('tr');
+      const $th1 = document.createElement('th');
+      const $th2 = document.createElement('th');
+      $th1.innerHTML = 'Nome';
+      $th2.innerHTML = 'Quantidade';
+      $tr.appendChild($th1);
+      $tr.appendChild($th2);
+      $thead.appendChild($tr);
+      $table.appendChild($thead);
+      res.forEach((row: any) => {
+        const $tr = document.createElement('tr');
+        const $td1 = document.createElement('td');
+        const $td2 = document.createElement('td');
+        $td1.innerHTML = row.nome;
+        $td2.innerHTML = row.quantidade;
+        $tr.appendChild($td1);
+        $tr.appendChild($td2);
+        $tbody.appendChild($tr);
+      });
+
+      $table.appendChild($tbody);
+      conteudo.appendChild($table);
+    })
+  }
+
+  // executarQuery(query: string) {
+  //   this.httpClientService.executeQuery(query).subscribe((res: any) => {
+  //     console.log(res);
+  //   });
+  // }
+
   selecionarConteudo(conteudo: any) {
     this.$menuConteudo!.innerHTML = '';
     if (conteudo.inputs.length > 0) {
@@ -257,53 +306,4 @@ export class TsSimplesComponent {
       this.$menuConteudo?.classList.remove('remove-bg');
     } 
   }
-
-  populateSelect(select: HTMLSelectElement, selectDb: string, programa: string) {
-    this.httpClient.getSelectOptions(programa, selectDb).subscribe((res: any) => {
-      select.innerHTML = '';
-      res.forEach((option: any) => {
-        const $option = document.createElement('option');
-        $option.value = option.id;
-        $option.innerHTML = option.status;
-        select.appendChild($option);
-      });
-    });
-  };
-
-  montaTabelaMonitoramento(query: string, programa: string, conteudo: HTMLElement) {
-    this.httpClient.getdadosMonitoramento(programa, query).subscribe((res: any) => {
-      const $table = document.createElement('table');
-      $table.classList.add('conteudo-table');
-      const $thead = document.createElement('thead');
-      const $tbody = document.createElement('tbody');
-      const $tr = document.createElement('tr');
-      const $th1 = document.createElement('th');
-      const $th2 = document.createElement('th');
-      $th1.innerHTML = 'Nome';
-      $th2.innerHTML = 'Quantidade';
-      $tr.appendChild($th1);
-      $tr.appendChild($th2);
-      $thead.appendChild($tr);
-      $table.appendChild($thead);
-      res.forEach((row: any) => {
-        const $tr = document.createElement('tr');
-        const $td1 = document.createElement('td');
-        const $td2 = document.createElement('td');
-        $td1.innerHTML = row.nome;
-        $td2.innerHTML = row.quantidade;
-        $tr.appendChild($td1);
-        $tr.appendChild($td2);
-        $tbody.appendChild($tr);
-      });
-
-      $table.appendChild($tbody);
-      conteudo.appendChild($table);
-    })
-  }
-
-  // executarQuery(query: string) {
-  //   this.httpClientService.executeQuery(query).subscribe((res: any) => {
-  //     console.log(res);
-  //   });
-  // }
 }
